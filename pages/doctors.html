@@ -2,13 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doctors - CureLex</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Doctor Authentication</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #4e73df;
+        }
+
+        .show-password {
+            font-size: 13px;
+            margin-top: 5px;
+            cursor: pointer;
+            color: #4e73df;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #4e73df;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2e59d9;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Doctors Page</h1>
-    <p>This page is under development.</p>
-    <a href="dashboard.html">Back to Dashboard</a>
+
+<div class="login-container">
+    <h2>Doctor Login</h2>
+
+    <div class="input-group">
+        <label for="doctorId">Doctor ID</label>
+        <input type="text" id="doctorId" placeholder="Enter Doctor ID">
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter Password">
+        <div class="show-password" onclick="togglePassword()">Show Password</div>
+    </div>
+
+    <button class="btn" onclick="authenticate()">Login</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+
+    function authenticate() {
+        const doctorId = document.getElementById("doctorId").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const message = document.getElementById("message");
+
+        // Demo credentials
+        const validDoctorId = "DOC123";
+        const validPassword = "doctor@123";
+
+        if (doctorId === "" || password === "") {
+            message.innerHTML = "<div class='error'>All fields are required!</div>";
+            return;
+        }
+
+        if (doctorId === validDoctorId && password === validPassword) {
+            message.innerHTML = "<div class='success'>Login Successful!</div>";
+            
+            // Redirect example
+            setTimeout(() => {
+                alert("Welcome Doctor!");
+                // window.location.href = "dashboard.html";
+            }, 1000);
+        } else {
+            message.innerHTML = "<div class='error'>Invalid Doctor ID or Password!</div>";
+        }
+    }
+</script>
+
 </body>
 </html>
